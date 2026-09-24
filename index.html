@@ -28,7 +28,7 @@ nav{display:flex;gap:7px;overflow-x:auto;padding:12px 0 4px;scrollbar-width:none
 nav::-webkit-scrollbar{display:none}
 nav a{flex:0 0 auto;font-size:13px;padding:6px 12px;border-radius:999px;
 background:var(--card);border:1px solid var(--line);color:var(--ink);text-decoration:none}
-h2{font-size:15px;margin:26px 0 10px;display:flex;justify-content:space-between;align-items:baseline}
+h2{scroll-margin-top:calc(var(--barh,40px) + 54px);font-size:15px;margin:26px 0 10px;display:flex;justify-content:space-between;align-items:baseline}
 h2 small{font-weight:400;color:var(--sub);font-size:12px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:13px;
 padding:11px 13px;margin-bottom:8px}
@@ -81,28 +81,79 @@ ul.docs li::before{counter-increment:d;content:counter(d);position:absolute;
 left:11px;top:9px;font-size:11px;color:var(--accent);font-weight:650}
 .pw{font-weight:550;line-height:1.5}
 .pa{margin-top:5px;font-size:12.5px;color:var(--sub);font-variant-numeric:tabular-nums}
+.hero{margin:14px 0 0;position:relative;border-radius:16px;overflow:hidden;
+background:var(--card);border:1px solid var(--line);cursor:zoom-in}
+.hero img{display:block;width:100%;height:auto;max-height:62vh;object-fit:cover;object-position:center 42%}
+.hero figcaption{position:absolute;left:0;right:0;bottom:0;padding:30px 13px 11px;color:#fff;
+font-size:12.5px;display:flex;justify-content:space-between;align-items:flex-end;gap:10px;
+background:linear-gradient(transparent,rgba(0,0,0,.7))}
+.hero .zoom{font-size:11px;opacity:.85;white-space:nowrap}
+.gal{display:flex;gap:9px;overflow-x:auto;padding:2px 0 6px;
+scroll-snap-type:x mandatory;scrollbar-width:none}
+.gal::-webkit-scrollbar{display:none}
+.gitem{flex:0 0 46%;scroll-snap-align:start;padding:0;border:1px solid var(--line);
+background:var(--card);border-radius:13px;overflow:hidden;cursor:zoom-in;font:inherit;color:inherit}
+.gitem img{display:block;width:100%;aspect-ratio:1/1;object-fit:cover}
+.gitem span{display:block;padding:7px 9px;font-size:11.5px;color:var(--sub);text-align:left;
+white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.lb{position:fixed;inset:0;z-index:50;background:rgba(0,0,0,.95);display:flex;
+flex-direction:column;align-items:center;justify-content:center;padding:14px}
+.lb[hidden]{display:none}
+.lb img{max-width:100%;max-height:76vh;border-radius:10px;object-fit:contain}
+.lbcap{color:#e8eaed;font-size:13px;margin-top:13px;text-align:center;padding:0 10px}
+.lbx{position:absolute;top:calc(env(safe-area-inset-top) + 10px);right:12px;width:38px;height:38px;
+border-radius:50%;border:0;background:rgba(255,255,255,.16);color:#fff;font-size:20px;cursor:pointer}
+.lbn{position:absolute;top:50%;transform:translateY(-50%);width:42px;height:42px;border-radius:50%;
+border:0;background:rgba(255,255,255,.14);color:#fff;font-size:19px;cursor:pointer}
+.lbn.pv{left:10px}.lbn.nx{right:10px}
+.lbn:disabled{opacity:0;pointer-events:none}
+.bar{position:fixed;top:0;left:0;right:0;z-index:30;background:rgba(246,247,249,.87);
+-webkit-backdrop-filter:saturate(180%) blur(12px);backdrop-filter:saturate(180%) blur(12px);
+border-bottom:1px solid var(--line);transform:translateY(-101%);transition:transform .22s ease}
+@media(prefers-color-scheme:dark){.bar{background:rgba(14,16,19,.87)}}
+.bar.on{transform:none}
+.bar .in{max-width:480px;margin:0 auto;padding:9px 14px;display:flex;
+justify-content:space-between;align-items:baseline;gap:10px;font-size:12.5px;color:var(--sub)}
+.bar b{font-variant-numeric:tabular-nums;font-size:15px;color:var(--ink)}
+nav{position:sticky;top:var(--barh,40px);z-index:20;margin:0 -14px;padding:8px 14px 6px;
+background:rgba(246,247,249,.92);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@media(prefers-color-scheme:dark){nav{background:rgba(14,16,19,.92)}}
+nav a.act{background:var(--accent);border-color:var(--accent);color:#fff}
+.top{position:fixed;right:14px;bottom:calc(env(safe-area-inset-bottom) + 16px);z-index:29;
+width:42px;height:42px;border-radius:50%;border:1px solid var(--line);background:var(--card);
+color:var(--ink);font-size:16px;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .2s}
+.top.on{opacity:.96;pointer-events:auto}
+html{scroll-behavior:smooth}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.bar{transition:none}}
 .foot{margin-top:26px;font-size:12px;color:var(--sub);line-height:1.7}
 .foot p{margin:0 0 8px}
 </style>
-</head><body><div class="wrap">
+</head><body>
+<div class="bar" id="bar"><div class="in"><span>来福救助 · 结余</span>
+<b>¥6,191.56</b></div></div>
+<div class="wrap">
 <header>
   <h1>来福救助 · 爱心捐款账单</h1>
   <div class="upd">更新至 2026-09-24　·　发起人 Zoey</div>
 </header>
 
-<div class="stats">
+<figure class="hero" data-i="0"><img class="" src="photos/p01.jpg" width="1280" height="1707" alt="住院中的来福" loading="lazy" decoding="async"><figcaption>住院中的来福<span class="zoom">点击看大图</span></figcaption></figure>
+
+<div class="stats" id="stats">
   <div class="stat big"><span class="k">结余</span><span class="v">¥6,191.56</span></div>
   <div class="stat raised"><span class="k">募集总额</span><span class="v">¥15,093.56</span></div>
   <div class="stat spent"><span class="k">已支出</span><span class="v">¥8,902.00</span></div>
 </div>
 
 <nav>
-  <a href="#exp">开销</a><a href="#don">捐款明细</a><a href="#byday">按日期</a>
-  <a href="#bych">按渠道</a><a href="#byname">按人</a><a href="#docs">单据</a>
-  <a href="#pend">待核对</a>
+  <a href="#exp">开销</a><a href="#don">捐款明细</a>
+  <a href="#byday">按日期</a><a href="#bych">按渠道</a><a href="#byname">按人</a>
+  <a href="#docs">单据</a><a href="#pend">待核对</a>
 </nav>
 
 <h2 id="exp">开销<small>7 项 · 合计 ¥8,902.00</small></h2><div class="card"><div class="row"><span class="nm">押金充值（住院·抢救）</span><span class="amt out">¥2,000.00</span></div><div class="row2"><span class="chip c7">联合宠物医院动物园分院</span><span class="dt">2026-09-11 或之前</span></div><details class="note"><summary>说明</summary><div>反推得出：09-11 22:47 的结算单（JS2026091100887）抵扣押金 500 后写「余额结余：押金 1500 元」，故结算前押金＝2000｜充值小票本身没截到，金额由结算单倒推</div></details></div><div class="card"><div class="row"><span class="nm">押金充值（住院·抢救）</span><span class="amt out">¥2,000.00</span></div><div class="row2"><span class="chip c7">联合宠物医院动物园分院</span><span class="dt">2026-09-12 21:31</span></div><details class="note"><summary>说明</summary><div>充值单号 CZ202609120063｜充值后小票写「账户余额：押金(动物园分院) ¥3500.00」＝1500＋2000，对账闭合</div></details></div><div class="card"><div class="row"><span class="nm">结算单尾款·美团小白盒（住院·抢救）</span><span class="amt out">¥200.00</span></div><div class="row2"><span class="chip c7">联合宠物医院动物园分院</span><span class="dt">2026-09-16 21:04</span></div><details class="note"><summary>说明</summary><div>结算单 JS2026091600233 折后应付 234.6 元，当时押金只剩 34.6 元，差额 200 元用美团小白盒另付｜付完押金余额归 0</div></details></div><div class="card"><div class="row"><span class="nm">结算单 JS2026091700553（住院·抢救）</span><span class="amt out">¥513.60</span></div><div class="row2"><span class="chip c7">联合宠物医院动物园分院</span><span class="dt">2026-09-19</span></div><details class="note"><summary>说明</summary><div>09-17 16:55～09-19 17:51 的费用，原价 856、优惠 342.4、折后 513.6｜用户 2026-09-20 确认「昨日已付」｜09-19 20:18 打印那张还显示未结算，故是当晚 20:18 之后付的；当时医院押金已为 0，不可能从押金扣，属另行直付｜支付方式与最终结算小票待补</div></details></div><div class="card"><div class="row"><span class="nm">结算单 JS2026092100811（住院·抢救）</span><span class="amt out">¥492.00</span></div><div class="row2"><span class="chip c7">联合宠物医院动物园分院</span><span class="dt">2026-09-24 19:59</span></div><details class="note"><summary>说明</summary><div>09-20～09-24 五天住院，每天 98.40，原价 820、优惠 328、折后 492.00｜支付成功页：订单应付 ¥492、下单时间 2026-09-24 19:59:19、商户「联合宠物医院.牙科.犬猫内科（动物园分院）」｜黄底带点评入口的第三方买单页（应为美团）｜当时医院押金余额为 0，属另行直付</div></details></div><div class="card"><div class="row"><span class="nm">脑部 CT（含麻醉）</span><span class="amt out">¥2,268.00</span></div><div class="row2"><span class="chip c7">深圳市创凡宠物管理有限公司</span><span class="dt">2026-09-20</span></div><details class="note"><summary>说明</summary><div>创凡账单：开单总计 3,100.00、实收总计 2,268.00（票面逐项都给了实收额，累加正好 2,268.00）｜CT 单部位 1800→1158.26、CT 增强照影 开单 800→788（原单价 1000）、诱导麻醉 100→64.35、吸入麻醉首小时 400→257.39、免疫挂号 0｜⚠️ 尚无付款凭证截图，金额取自账单「实收总计」</div></details></div><div class="card"><div class="row"><span class="nm">眼科检查（夜间急诊）</span><span class="amt out">¥1,428.40</span></div><div class="row2"><span class="chip c7">深圳市创凡宠物管理有限公司</span><span class="dt">2026-09-18 22:01</span></div><details class="note"><summary>说明</summary><div>微信零钱支付，交易单号 单号已隐去｜对应创凡账单：原价合计 1,733.00，夜间看诊/助理加班 210 元票面手写标注「不打折」，其余 1,523.00 打八折 ＝ 1,218.40，合计 1,428.40，与付款金额分毫不差｜逐项见下方「创凡宠物账单勾稽」</div></details></div>
+
+
 
 <h2>账单勾稽<small>与实付现金逐笔对账</small></h2>
 <details class="rec"><summary><span>联合宠物医院账单勾稽 — 住院·抢救</span><b>¥5,205.60</b></summary><div><b>原价 ¥8,302.00 → 实付 ¥5,205.60</b><br>折后应付小计 5205.60 ＝ 付给联合的现金 5205.60（押金 2000＋2000、09-16 美团 200、09-19 直付 513.60、09-24 直付 492.00），两条路径独立对账闭合；押金余额已归 0</div></details><details class="rec"><summary><span>创凡宠物账单勾稽 ① — 眼科检查 2026-09-18</span><b>¥1,428.40</b></summary><div><b>原价 ¥1,733.00 → 实付 ¥1,428.40</b><br>原价合计 1733.00（票面「原价合计 1,733.00」）｜夜间加班 210.00 不打折 ＋ 其余 1523.00 打八折 ＝ 1428.40 ＝ 微信实付，逐项累加也是 1428.40｜注：票面只写了手写小计，逐项实收是按该规则推算的</div></details><details class="rec"><summary><span>创凡宠物账单勾稽 ② — 脑部 CT 2026-09-20</span><b>¥2,268.00</b></summary><div><b>原价 ¥3,100.00 → 实付 ¥2,268.00</b><br>开单总计 3100.00、实收总计 2268.00 与票面一致，逐项实收额累加也是 2268.00，优惠 832.00｜数量均为 1｜尚无付款凭证截图</div></details>
@@ -127,4 +178,70 @@ left:11px;top:9px;font-size:11px;color:var(--accent);font-weight:650}
   但把姓名放进「是不是重复计账」的语境里是另一回事。</p>
   <p>本页由账本 Excel 自动生成，数字未经二次计算。</p>
 </div>
-</div></body></html>
+</div>
+<button class="top" id="totop" aria-label="回到顶部">↑</button>
+<div class="lb" id="lb" hidden>
+  <button class="lbx" id="lbx" aria-label="关闭">×</button>
+  <button class="lbn pv" id="lbpv" aria-label="上一张">‹</button>
+  <img id="lbimg" alt="">
+  <button class="lbn nx" id="lbnx" aria-label="下一张">›</button>
+  <div class="lbcap" id="lbcap"></div>
+</div>
+<script>
+(function(){
+  var P = [{"src":"photos/p01.jpg","cap":"住院中的来福","date":""}];
+  var lb=document.getElementById('lb'), im=document.getElementById('lbimg'),
+      cp=document.getElementById('lbcap'), pv=document.getElementById('lbpv'),
+      nx=document.getElementById('lbnx'), cur=0;
+  function paint(){ var p=P[cur]; im.src=p.src;
+    cp.textContent=[p.date,p.cap].filter(Boolean).join(' · ');
+    pv.disabled=(cur<=0); nx.disabled=(cur>=P.length-1); }
+  function open_(i){ if(!P.length) return; cur=i; paint(); lb.hidden=false;
+    document.documentElement.style.overflow='hidden'; }
+  function close_(){ lb.hidden=true; document.documentElement.style.overflow=''; }
+  function step(d){ var n=cur+d; if(n>=0&&n<P.length){ cur=n; paint(); } }
+  Array.prototype.forEach.call(document.querySelectorAll('[data-i]'), function(el){
+    el.addEventListener('click', function(){ open_(parseInt(el.dataset.i,10)); }); });
+  document.getElementById('lbx').addEventListener('click', close_);
+  pv.addEventListener('click', function(e){ e.stopPropagation(); step(-1); });
+  nx.addEventListener('click', function(e){ e.stopPropagation(); step(1); });
+  lb.addEventListener('click', function(e){ if(e.target===lb||e.target===cp) close_(); });
+  document.addEventListener('keydown', function(e){
+    if(lb.hidden) return;
+    if(e.key==='Escape') close_();
+    if(e.key==='ArrowLeft') step(-1);
+    if(e.key==='ArrowRight') step(1); });
+  var tx=0;
+  lb.addEventListener('touchstart', function(e){ tx=e.changedTouches[0].clientX; }, {passive:true});
+  lb.addEventListener('touchend', function(e){
+    var d=e.changedTouches[0].clientX-tx; if(Math.abs(d)>48) step(d<0?1:-1); }, {passive:true});
+
+  function sizeBar(){
+    var h=document.getElementById('bar').offsetHeight;
+    document.documentElement.style.setProperty('--barh', h + 'px');   // 导航吸顶位置＝结余条实高，别写死
+  }
+  sizeBar();
+  window.addEventListener('resize', sizeBar, {passive:true});
+
+  var bar=document.getElementById('bar'), top=document.getElementById('totop'),
+      links=[].slice.call(document.querySelectorAll('nav a')),
+      secs=links.map(function(a){ return document.querySelector(a.getAttribute('href')); }),
+      anchor=document.getElementById('stats'), tick=false;
+  function upd(){
+    tick=false;
+    var y=window.scrollY||document.documentElement.scrollTop;
+    var past=y > (anchor.offsetTop + anchor.offsetHeight - 58);
+    bar.classList.toggle('on', past);
+    top.classList.toggle('on', y > 1200);
+    var act=-1;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && secs[i].getBoundingClientRect().top <= 110) act=i;
+    }
+    links.forEach(function(a,i){ a.classList.toggle('act', i===act); });
+  }
+  window.addEventListener('scroll', function(){
+    if(!tick){ tick=true; requestAnimationFrame(upd); } }, {passive:true});
+  upd();
+})();
+</script>
+</body></html>
